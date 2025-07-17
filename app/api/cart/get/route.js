@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/config/db";
 import {getAuth} from "@clerk/nextjs/server";
-import User from "@/models/user";
+import User from "@/models/users";
 
 export async function GET(request){
     try {
