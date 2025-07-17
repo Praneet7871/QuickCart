@@ -2,10 +2,13 @@
 import { addressDummyData } from "@/assets/assets";
 import { useAppContext } from "@/context/AppContext";
 import React, { useEffect, useState } from "react";
+import { toast } from 'react-hot-toast';
+import axios from "axios";
 
 const OrderSummary = () => {
 
-  const { currency, router, getCartCount, getCartAmount } = useAppContext()
+const { currency, router, getCartCount, getCartAmount, cartItems, setCartItems, getToken } = useAppContext()
+
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -21,6 +24,32 @@ const OrderSummary = () => {
   };
 
   const createOrder = async () => {
+    try {
+      let cartItemsArray = Object.keys(cartItems).map((key) => ({product:key,quantity:cartItems[key]}));
+      cartItemsArray = cartItemsArray.filter(item => item.quantity > 0);
+
+      if (cartItemsArray.length === 0) {
+        return toast.error("No items in cart");
+      }
+      const token = await getToken();
+      const { data} =await axios.post('/api/order/create',{
+        address: "no address",
+        items: cartItemsArray
+      }, {headers: {Authorization: `Bearer ${token}`}
+      })
+
+      if(data.success) {
+        toast.success(data.message);
+setCartItems({})
+        router.push('/order-placed');
+      }
+      else{
+        toast.error(data.message);
+      }
+
+    } catch (error) {
+      toast.error(error.message);
+    }
 
   }
 

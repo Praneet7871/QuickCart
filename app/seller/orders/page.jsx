@@ -5,22 +5,35 @@ import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import Footer from "@/components/seller/Footer";
 import Loading from "@/components/Loading";
+import axios from "axios";
 
 const Orders = () => {
 
-    const { currency } = useAppContext();
+    const { currency,getToken,user } = useAppContext();
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const fetchSellerOrders = async () => {
-        setOrders(orderDummyData);
+        try{const  token = await getToken();
+        const{data} = await axios.get('/api/order/seller-orders',{headers: { Authorization: `Bearer ${token}` }});
+    if(data.success) {
+        setOrders(data.orders);
         setLoading(false);
+    }else{
+        toast.error(data.message)
+    }}catch(error) {
+        toast.error(error.message)
+
+    }
     }
 
     useEffect(() => {
-        fetchSellerOrders();
-    }, []);
+        if(user){
+
+            fetchSellerOrders();
+        }
+    }, [user]);
 
     return (
         <div className="flex-1 h-screen overflow-scroll flex flex-col justify-between text-sm">
@@ -43,16 +56,10 @@ const Orders = () => {
                                 </p>
                             </div>
                             <div>
-                                <p>
-                                    <span className="font-medium">{order.address.fullName}</span>
-                                    <br />
-                                    <span >{order.address.area}</span>
-                                    <br />
-                                    <span>{`${order.address.city}, ${order.address.state}`}</span>
-                                    <br />
-                                    <span>{order.address.phoneNumber}</span>
-                                </p>
-                            </div>
+  <p>
+    <span className="font-medium">No address info</span>
+  </p>
+</div>
                             <p className="font-medium my-auto">{currency}{order.amount}</p>
                             <div>
                                 <p className="flex flex-col">
