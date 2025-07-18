@@ -63,7 +63,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="flex-1 min-h-screen flex flex-col justify-between">
+    <div className="flex-1 min-h-screen flex flex-col justify-between text-white font-normal">
       <form onSubmit={handleSubmit} className="md:p-10 p-4 space-y-5 max-w-lg">
         <div>
           <p className="text-base font-medium">Product Image</p>
@@ -78,11 +78,11 @@ const AddProduct = () => {
                 }} type="file" id={`image${index}`} hidden />
                 <Image
                   key={index}
-                  className="max-w-24 cursor-pointer"
+                  className="max-w-24 cursor-pointer rounded-lg bg-white/10 backdrop-blur-md border border-white/20"
                   src={files[index] ? URL.createObjectURL(files[index]) : assets.upload_area}
                   alt=""
-                  width={100}
-                  height={100}
+                  width={1000}
+                  height={1000}
                 />
               </label>
             ))}
@@ -91,19 +91,25 @@ const AddProduct = () => {
 
 <div>
   <p className="text-base font-medium mt-4">3D Model Files</p>
-  <input
-    type="file"
-    accept=".glb,.obj,.fbx,.stl"
-    multiple
-    onChange={(e) => setModelFiles(Array.from(e.target.files))}
-    className="block mt-2"
-  />
+
+  <label className="inline-block mt-2 px-4 py-2 cursor-pointer text-white rounded-md border border-white/20 backdrop-blur-md bg-white/10 hover:bg-white/20 transition duration-200">
+    Choose Files To Upload
+    <input
+      type="file"
+      accept=".glb,.obj,.fbx,.stl"
+      multiple
+      onChange={(e) => setModelFiles(Array.from(e.target.files))}
+      className="hidden"
+    />
+  </label>
 </div>
 
 
 
+
+
         </div>
-        <div className="flex flex-col gap-1 max-w-md">
+        <div className="flex flex-col gap-1 max-w-md rounded-lg">
           <label className="text-base font-medium" htmlFor="product-name">
             Product Name
           </label>
@@ -117,7 +123,7 @@ const AddProduct = () => {
             required
           />
         </div>
-        <div className="flex flex-col gap-1 max-w-md">
+        <div className="flex flex-col gap-1 max-w-md rounded-lg">
           <label
             className="text-base font-medium"
             htmlFor="product-description"

@@ -6,6 +6,7 @@ import { useAppContext } from "@/context/AppContext";
 import Footer from "@/components/seller/Footer";
 import Loading from "@/components/Loading";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Orders = () => {
 
@@ -36,7 +37,7 @@ const Orders = () => {
     }, [user]);
 
     return (
-        <div className="flex-1 h-screen overflow-scroll flex flex-col justify-between text-sm">
+        <div className="flex-1 h-screen overflow-scroll flex flex-col justify-between text-sm text-white font-normal">
             {loading ? <Loading /> : <div className="md:p-10 p-4 space-y-5">
                 <h2 className="text-lg font-medium">Orders</h2>
                 <div className="max-w-4xl rounded-md">
@@ -50,7 +51,19 @@ const Orders = () => {
                                 />
                                 <p className="flex flex-col gap-3">
                                     <span className="font-medium">
-                                        {order.items.map((item) => item.product.name + ` x ${item.quantity}`).join(", ")}
+                                       {
+  order.items && order.items.length > 0
+    ? order.items
+        .map((item) =>
+          item.product
+            ? `${item.product.name} x ${item.quantity}`
+            : `Unknown Product x ${item.quantity}`
+        )
+        .join(", ")
+    : "No orders yet"
+}
+
+
                                     </span>
                                     <span>Items : {order.items.length}</span>
                                 </p>

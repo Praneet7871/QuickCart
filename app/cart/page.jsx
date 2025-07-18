@@ -13,28 +13,28 @@ const Cart = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col md:flex-row gap-10 px-6 md:px-16 lg:px-32 pt-14 mb-20">
+      <div className="flex flex-col md:flex-row gap-10 px-6 md:px-16 lg:px-32 pt-14 mb-20 text-white font-normal">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-8 border-b border-gray-500/30 pb-6">
-            <p className="text-2xl md:text-3xl text-gray-500">
+            <p className="text-2xl md:text-3xl ">
               Your <span className="font-medium text-orange-600">Cart</span>
             </p>
-            <p className="text-lg md:text-xl text-gray-500/80">{getCartCount()} Items</p>
+            <p className="text-lg md:text-xl ">{getCartCount()} Items</p>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto ">
             <table className="min-w-full table-auto">
               <thead className="text-left">
                 <tr>
-                  <th className="text-nowrap pb-6 md:px-4 px-1 text-gray-600 font-medium">
+                  <th className="text-nowrap pb-6 md:px-4 px-1 font-normal font-medium ">
                     Product Details
                   </th>
-                  <th className="pb-6 md:px-4 px-1 text-gray-600 font-medium">
+                  <th className="pb-6 md:px-4 px-1 font-normal font-medium">
                     Price
                   </th>
-                  <th className="pb-6 md:px-4 px-1 text-gray-600 font-medium">
+                  <th className="pb-6 md:px-4 px-1 font-normal font-medium">
                     Quantity
                   </th>
-                  <th className="pb-6 md:px-4 px-1 text-gray-600 font-medium">
+                  <th className="pb-6 md:px-4 px-1 font-normal font-medium">
                     Subtotal
                   </th>
                 </tr>
@@ -66,7 +66,7 @@ const Cart = () => {
                           </button>
                         </div>
                         <div className="text-sm hidden md:block">
-                          <p className="text-gray-800">{product.name}</p>
+                          <p className="">{product.name}</p>
                           <button
                             className="text-xs text-orange-600 mt-1"
                             onClick={() => updateCartQuantity(product._id, 0)}
@@ -75,7 +75,7 @@ const Cart = () => {
                           </button>
                         </div>
                       </td>
-                      <td className="py-4 md:px-4 px-1 text-gray-600">${product.offerPrice}</td>
+                      <td className="py-4 md:px-4 px-1 font-normal">${product.offerPrice}</td>
                       <td className="py-4 md:px-4 px-1">
                         <div className="flex items-center md:gap-2 gap-1">
                           <button onClick={() => updateCartQuantity(product._id, cartItems[itemId] - 1)}>
@@ -95,7 +95,7 @@ const Cart = () => {
                           </button>
                         </div>
                       </td>
-                      <td className="py-4 md:px-4 px-1 text-gray-600">${(product.offerPrice * cartItems[itemId]).toFixed(2)}</td>
+                      <td className="py-4 md:px-4 px-1 font-normal">${(product.offerPrice * cartItems[itemId]).toFixed(2)}</td>
                     </tr>
                   );
                 })}
