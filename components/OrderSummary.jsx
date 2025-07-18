@@ -39,6 +39,27 @@ const { currency, router, getCartCount, getCartAmount, cartItems, setCartItems, 
       })
 
       if(data.success) {
+        const productIds = cartItemsArray.map(item => item.product);
+
+const productDetails = await Promise.all(productIds.map(async (id) => {
+  const res = await axios.get(`/api/product/${id}`);
+  return res.data.product;
+}));
+
+// loop through models and auto-download
+productDetails.forEach(product => {
+  if (product.models && product.models.length > 0) {
+    product.models.forEach(modelUrl => {
+      const link = document.createElement('a');
+      link.href = modelUrl;
+      link.download = modelUrl.split('/').pop();
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  }
+});
+
         toast.success(data.message);
 setCartItems({})
         router.push('/order-placed');

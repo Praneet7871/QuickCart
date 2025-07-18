@@ -16,6 +16,8 @@ const AddProduct = () => {
   const [category, setCategory] = useState('Earphone');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
+  const [modelFiles, setModelFiles] = useState([]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,10 @@ const AddProduct = () => {
     for (let i=0;i<files.length;i++) {
       formData.append('images', files[i]);
     }
+    for (let i = 0; i < modelFiles.length; i++) {
+  formData.append('models', modelFiles[i]);
+}
+
 
     try {
       const token = await getToken();
@@ -82,6 +88,20 @@ const AddProduct = () => {
             ))}
 
           </div>
+
+<div>
+  <p className="text-base font-medium mt-4">3D Model Files</p>
+  <input
+    type="file"
+    accept=".glb,.obj,.fbx,.stl"
+    multiple
+    onChange={(e) => setModelFiles(Array.from(e.target.files))}
+    className="block mt-2"
+  />
+</div>
+
+
+
         </div>
         <div className="flex flex-col gap-1 max-w-md">
           <label className="text-base font-medium" htmlFor="product-name">
