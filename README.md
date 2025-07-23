@@ -52,22 +52,7 @@ Make sure you have:
 Create a .env.local file in the root:
 
 
-MONGODB_URI=<your MongoDB URI>
 
-CLERK_SECRET_KEY=<your Clerk Secret Key>
-CLERK_PUBLISHABLE_KEY=<your Clerk Publishable Key>
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-
-CLOUDINARY_CLOUD_NAME=<your Cloudinary cloud name>
-CLOUDINARY_API_KEY=<your Cloudinary API key>
-CLOUDINARY_API_SECRET=<your Cloudinary API secret>
-
-NEXT_PUBLIC_CURRENCY=$
-
-INNGEST_SIGNING_KEY=<your Inngest key>
 🧑‍💻 Getting Started
 Clone the repo
 
