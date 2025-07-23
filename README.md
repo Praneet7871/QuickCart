@@ -111,34 +111,6 @@ User order history: /my-orders
 
 Confirmation page after placing an order: /order-placed
 
-📦 API Endpoints
-QuickCart uses Next.js API routes with Clerk auth.
-
-🔐 Auth Required
-Route	Description
-GET /api/cart/get	Get user's cart
-POST /api/cart/update	Update cart items
-POST /api/order/create	Place an order
-GET /api/order/list	User order history
-GET /api/order/seller-orders	Seller view of all their orders
-POST /api/product/add	Add product (Seller only)
-GET /api/product/list	All products
-GET /api/product/seller-list	Seller's products
-GET /api/user/data	Get user info
-
-Example: Fetching user data with token
-js
-Copy
-Edit
-import axios from 'axios';
-
-const token = await getToken(); // Clerk auth token
-
-const { data } = await axios.get('/api/user/data', {
-  headers: {
-    Authorization: Bearer ${token},
-  },
-});
 🤝 Contributing
 Fork the repo
 
@@ -150,12 +122,3 @@ Push and open a pull request
 
 📄 License
 This project does not currently specify a license. All rights reserved.
-
-🧩 Need Help?
-Open an issue or contact Praneet7871 directly.
-
-css
-Copy
-Edit
-
-Let me know if you want a logo/banner, license, badges (like Vercel deploy status or GitHub stars), or 
