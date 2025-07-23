@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getAuth } from "@clerk/nextjs/server";
 import Product from "@/models/Product";
 import cloudinary from "@/config/cloudinary";
-import dbConnect from "@/config/dbConnect";
+import dbConnect from "@/config/db";
 
 // helper to upload a file to cloudinary
 async function uploadToCloudinary(file, resource_type = "auto") {
