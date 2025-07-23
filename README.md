@@ -38,11 +38,3 @@ QuickCart is a full-stack e-commerce platform built with **Next.js**, designed f
 
 ---
 
-
-
-Make your changes and commit
-
-Push and open a pull request
-
-📄 License
-This project does not currently specify a license. All rights reserved.
