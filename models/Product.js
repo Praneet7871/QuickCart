@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema({
   price:{type:Number , required:true},
   offerPrice:{type:Number , required:true},
   image:{type:Array , required:true},
-   models: { type: Array, default: [] }, // 💥 NEW FIELD
+   models: [String],
+modelNames: [String], // 💥 NEW FIELD
   category:{type:String , required:true},
   date:{type:Number,required:true},
 });

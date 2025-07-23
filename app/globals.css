@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+.backdrop-blur-xs {
+  backdrop-filter: blur(3px);
+}
+
+
 @layer base {
   body {
     @apply text-white font-bold;

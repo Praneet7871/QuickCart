@@ -8,22 +8,33 @@ const Banner = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    let can_w = window.innerWidth;
-    let can_h = window.innerHeight;
-    canvas.width = can_w;
-    canvas.height = can_h;
+    const container = canvas.parentElement;
+
+    const getCanvasSize = () => {
+      const rect = container.getBoundingClientRect();
+      return { width: rect.width, height: rect.height };
+    };
+
+    let { width: can_w, height: can_h } = getCanvasSize();
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = can_w * dpr;
+    canvas.height = can_h * dpr;
+    canvas.style.width = `${can_w}px`;
+    canvas.style.height = `${can_h}px`;
+
     const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
 
     const BALL_NUM = 30;
     const R = 6;
-    const link_line_width = 2;
+    const link_line_width = 1.2;
     const dis_limit = 260;
     const alpha_f = 0.03;
     let balls = [];
     let mouse_in = false;
 
- const mouse_ball = { x: 0, y: 0, vx: 0, vy: 0, r: R, alpha: 1, phase: 0 };
-
+    const mouse_ball = { x: 0, y: 0, vx: 0, vy: 0, r: R, alpha: 1, phase: 0, type: "mouse" };
 
     const getRandomSpeed = (pos) => {
       switch (pos) {
@@ -128,10 +139,15 @@ const Banner = () => {
     init();
 
     window.addEventListener("resize", () => {
-      can_w = window.innerWidth;
-      can_h = window.innerHeight;
-      canvas.width = can_w;
-      canvas.height = can_h;
+      const newSize = getCanvasSize();
+      can_w = newSize.width;
+      can_h = newSize.height;
+
+      canvas.style.width = `${can_w}px`;
+      canvas.style.height = `${can_h}px`;
+      canvas.width = can_w * dpr;
+      canvas.height = can_h * dpr;
+      ctx.scale(dpr, dpr);
     });
 
     canvas.addEventListener("mouseenter", () => {
@@ -141,12 +157,13 @@ const Banner = () => {
 
     canvas.addEventListener("mouseleave", () => {
       mouse_in = false;
-      balls = balls.filter((b) => !b.type);
+      balls = balls.filter((b) => b.type !== "mouse");
     });
 
     canvas.addEventListener("mousemove", (e) => {
-      mouse_ball.x = e.pageX;
-      mouse_ball.y = e.pageY;
+      const rect = canvas.getBoundingClientRect();
+      mouse_ball.x = e.clientX - rect.left;
+      mouse_ball.y = e.clientY - rect.top;
     });
   }, []);
 
@@ -156,7 +173,7 @@ const Banner = () => {
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full z-0 bg-black/50"
       />
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between md:pl-4 py-14 md:py-0 bg-transparent backdrop-blur-sm">
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between md:pl-4 py-14 md:py-0 bg-transparent backdrop-blur-xs">
         <Image
           className="max-w-56"
           src={assets.jbl_soundbox_image}

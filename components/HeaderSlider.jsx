@@ -6,17 +6,17 @@ const HeaderSlider = () => {
   const sliderData = [
     {
       id: 1,
-      title: "Visualize it",
+      title: "Bring your ideas to life-model, style, and render in one seamless space.",
       imgSrc: assets.header_headphone_image,
     },
     {
       id: 2,
-      title: "Build it",
+      title: "From concept to final render, design with freedom and precision.",
       imgSrc: assets.header_playstation_image,
     },
     {
       id: 3,
-      title: "Render it",
+      title: "Build stunning 3D experiences, all in one creative playground.",
       imgSrc: assets.header_macbook_image,
     },
   ];
@@ -49,7 +49,7 @@ const HeaderSlider = () => {
   >
     {/* Text Section */}
     <div className="pl-0 md:pl-40 mt-6 md:mt-0 text-center md:text-left">
-      <h1 className="text-white font-semibold text-3xl md:text-6xl leading-tight max-w-xl">
+      <h1 className="text-white font-semibold text-5xl md:text-5xl leading-tight max-w-xl">
         {slide.title}
       </h1>
     </div>
